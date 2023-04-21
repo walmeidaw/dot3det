@@ -1,0 +1,95 @@
+.Tab {
+    grid-area: menu;
+
+    text-align: center;
+    font-size: 1rem;
+    display: flex;
+    gap: var(--space);
+    padding: var(--space);
+    flex-direction: column;
+
+    // background-color: rgba(var(--foreground-rgb), 6%);
+    border-radius: var(--border-radius);
+
+    .Item {
+        display: flex;
+        max-width: 100%;
+        gap: 0;
+        border-radius: var(--border-radius);
+
+        .Icon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // background-color: rgba(var(--main-one-opaque-rgb), 100%);
+            // color: rgb(var(--contrast-rgb));
+
+            color: rgb(var(--foreground-rgb));
+            aspect-ratio: 1/1;
+            padding: .75rem;
+            border-radius: var(--border-radius);
+            max-width: 3rem;
+            height: 3rem;
+            overflow: hidden;
+            transition: background 300ms linear;
+        }
+
+        &:hover, &:focus, &.Active{
+            .Icon{
+                // background-color: rgba(var(--main-one-rgb), 100%);
+            }
+
+            .Label{
+                // background-color: rgba(var(--main-one-opaque-rgb), 50%);
+            }
+
+            background-color: rgba(var(--foreground-rgb), 10%);
+        }
+
+        &:active{
+            background-color: rgba(var(--foreground-rgb), 15%);
+        }
+    
+        .Label{
+            display: none;
+            color: rgb(var(--foreground-rgb));
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            transition: background-color 300ms linear;
+        }
+    }
+}
+
+/* Cumprido */
+@media not all and (max-height: 100vw) {
+	/* Muito cumprido */
+	@media screen and (max-width:500px) {
+        .Tab {
+            flex-direction: row;
+            justify-content: center;
+            background-color: rgba(var(--foreground-rgb), 10%);
+            position: sticky;
+        }
+	}
+}
+
+/* Largo */
+@media not all and (max-width: 100vh) {
+    .Tab {
+        flex-direction: column;
+    }
+
+	/* Muito largo */
+	@media screen and (min-width:800px) {
+        .Tab{
+            .Item{
+                .Label{
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+            }
+        }
+	}
+}

@@ -1,0 +1,65 @@
+.Layout {
+	display: grid;
+	grid-template-columns: minmax(1cm, 4rem) 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 
+		"menu main"
+		"footer footer";
+
+	gap: 1rem;
+	grid-auto-flow: column dense;
+	height: 100%;
+	margin: auto;
+	padding: 2rem;
+	width: 100%;
+
+	.Main {
+		padding: var(--space);
+		grid-area: main;
+		overflow: auto;
+	}
+
+	.Content{
+		// nada aqui ainda
+	}
+
+	.Footer{
+		grid-area: footer;
+		padding: var(--space);
+	}
+}
+
+/* Cumprido */
+@media not all and (max-height: 100vw) {
+	/* Muito cumprido */
+	@media screen and (max-width:500px) {
+		.Layout {
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr minmax(1cm, 4rem) auto;
+			grid-template-areas:
+				"main"
+				"footer"
+				"menu";
+		}
+	}
+}
+
+/* Largo */
+@media not all and (max-width: 100vh) {
+	.Layout {
+		grid-template-columns: minmax(1cm, 4rem) 1fr;
+		grid-template-areas: 
+			"menu main"
+			"footer footer";
+	}
+
+	/* Muito largo */
+	@media screen and (min-width:800px) {
+		.Layout {
+			grid-template-columns: minmax(240px, 4rem) 1fr;
+			grid-template-areas: 
+				"menu main" 
+				"footer footer";
+		}
+	}
+}
