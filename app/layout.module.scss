@@ -7,10 +7,10 @@
 
 	gap: 1rem;
 	grid-auto-flow: column dense;
-	height: calc( 100% - var(--space) ) ;
+	height: 100% ;
 	width: 100%;
 	
-	margin: var(--space) auto 0 auto;
+	margin: auto;
 
 	.Main {
 		padding: var(--space);
@@ -42,8 +42,8 @@
 	}
 	
 	@media (display-mode: window-controls-overlay){
-		margin-top: calc( env(titlebar-area-height, 33px) + var(--space) );
-		height: calc( 100% - env(titlebar-area-height, 33px ) - var(--space) ) ;
+		margin-top: env(titlebar-area-height, 33px);
+		height: calc( 100% - env(titlebar-area-height, 33px ) ) ;
 	}
 }
 

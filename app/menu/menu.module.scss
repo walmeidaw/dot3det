@@ -1,5 +1,6 @@
 .Tab {
     grid-area: menu;
+    margin-top: var(--space);
 
     text-align: center;
     font-size: 1rem;
@@ -20,20 +21,18 @@
         white-space: nowrap;
 
         .Icon{
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            // background-color: rgba(var(--main-one-opaque-rgb), 100%);
-            // color: rgb(var(--main-one-rgb));
             color: rgb(var(--foreground-rgb));
             aspect-ratio: 1/1;
             padding: .75rem;
             border-radius: var(--border-radius);
             max-width: 2.5rem;
             height: 2.5rem;
-            overflow: hidden;
+            font-size: 3rem;
             transition: background 300ms linear;
-            font-size: 1.5rem;
         }
 
         &:active, &.Active{
