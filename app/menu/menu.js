@@ -30,6 +30,12 @@ export default function Menu(){
     }
 
     function handleGesture(){
+        const moving_x = touchEnd.x - touchStart.x
+
+        if( Math.abs( moving_x ) < 50 ){
+            return;
+        }
+
         // Swipe Right
         if( touchEnd.x > touchStart.x ){
             if( minimize ){
@@ -51,14 +57,8 @@ export default function Menu(){
         handleGesture()
     }, [touchEnd])
 
-    function toogleMenu(){
-        if( minimize ){
-            setMinimize( false )
-        }
-    }
-
     return (
-        <aside className={ `${ classes.Tab }${ minimize ? ` ${ classes.minimize }` : '' }` } onTouchStart={ touchStartEvent } onTouchEnd={ touchEndEvent } onClick={ toogleMenu }>
+        <aside className={ `${ classes.Tab }${ minimize ? ` ${ classes.minimize }` : '' }` } onTouchStart={ touchStartEvent } onTouchEnd={ touchEndEvent }>
             <Item icon={ `home` } href='/' color={ `#008cff` }>Início</Item>
             <Item icon={ `search` } href='/busca' color={ `#ffbb00` }>Busca</Item>
             <Item icon={ `build` } href='/configuracoes' color={ `#5b6996` }>Configurações</Item>

@@ -13,7 +13,7 @@
 	margin: auto;
 
 	.Main {
-		padding: var(--space);
+		padding: var(--space) var(--space) 0 var(--space) ;
 		grid-area: main;
 		overflow: auto;
 		display: flex;
@@ -22,17 +22,19 @@
 
 	.Content{
 		flex: 1;
-		padding: var(--space);
+		padding: var(--space) var(--space) 0 var(--space) ;
 
 		h1{
+			font-weight: 200;
 			font-size: 2.5rem;
-			margin-bottom: 1rem;
+			margin-bottom: calc( var(--space) * 3 );
+			color: rgb(var(--main-one-rgb))
 		}
 
 		p{
 			font-size: 1rem;
-			line-height: 1.5;
-			margin-bottom: calc( var(--space)*2 );
+			line-height: 1.75;
+			margin-bottom: calc( var(--space) * 3 );
 		}
 	}
 
