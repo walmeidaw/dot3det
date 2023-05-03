@@ -31,7 +31,8 @@
             border-radius: var(--border-radius);
             max-width: 2.5rem;
             height: 2.5rem;
-            font-size: 3rem;
+            font-size: 1.5rem;
+            line-height: 1;
             transition: background 300ms linear;
         }
 
@@ -99,7 +100,7 @@
             &:not(.minimize){
                 .Item{
                     .Label{
-                        width: clamp( 4rem, 180px, 240px );
+                        width: clamp( 4rem, 12rem, 17rem );
                         padding: 0.25rem;
 
                         opacity: 1;
