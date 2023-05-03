@@ -27,13 +27,14 @@ export default function RootLayout({ children }) {
       <body>
         <PushNotification />
         <div className={ classes.Layout }>
+          <aside className={ classes.Bar }>🐲</aside>
           <Menu />
           <main className={ classes.Main }>
             <div className={ classes.Content }>
               {children}
             </div>
+            <footer className={ classes.Footer }>Created by @<Link href="https://twitter.com/wllnrds">wllnrds</Link></footer>
           </main>
-          <footer className={ classes.Footer }>Created by @<Link href="https://twitter.com/wllnrds">wllnrds</Link></footer>
         </div>
       </body>
     </html>

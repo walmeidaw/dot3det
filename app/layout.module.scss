@@ -1,31 +1,70 @@
 .Layout {
 	display: grid;
-	grid-template-columns: minmax(1cm, 4rem) 1fr;
+	grid-template-columns: auto 1fr;
 	grid-template-rows: 1fr;
 	grid-template-areas: 
-		"menu main"
-		"footer footer";
+		"menu main";
 
 	gap: 1rem;
 	grid-auto-flow: column dense;
-	height: 100%;
-	margin: auto;
-	padding: 2rem;
+	height: calc( 100% - var(--space) ) ;
 	width: 100%;
+	
+	margin: var(--space) auto 0 auto;
 
 	.Main {
 		padding: var(--space);
 		grid-area: main;
 		overflow: auto;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.Content{
-		// nada aqui ainda
+		flex: 1;
+		padding: var(--space);
+
+		h1{
+			font-size: 2.5rem;
+			margin-bottom: 1rem;
+		}
+
+		p{
+			font-size: 1rem;
+			line-height: 1.5;
+			margin-bottom: calc( var(--space)*2 );
+		}
 	}
 
 	.Footer{
 		grid-area: footer;
 		padding: var(--space);
+	}
+	
+	@media (display-mode: window-controls-overlay){
+		margin-top: calc( env(titlebar-area-height, 33px) + var(--space) );
+		height: calc( 100% - env(titlebar-area-height, 33px ) - var(--space) ) ;
+	}
+}
+
+.Bar{
+	display: none;
+
+	@media (display-mode: window-controls-overlay) { 
+		position: fixed;
+		background: rgb(var(--main-two-rgb));
+
+		display: flex;
+		align-items: center;
+		padding: var(--space);
+
+		left: env(titlebar-area-x, 0);
+		top: env(titlebar-area-y, 0);
+
+		width: env(titlebar-area-width, 100%);
+		height: env(titlebar-area-height, 33px);
+
+		color: rgb(var(--contrast-rgb));
 	}
 }
 
@@ -34,11 +73,11 @@
 	/* Muito cumprido */
 	@media screen and (max-width:500px) {
 		.Layout {
+			gap: 0;
 			grid-template-columns: 1fr;
-			grid-template-rows: 1fr minmax(1cm, 4rem) auto;
+			grid-template-rows: 1fr auto;
 			grid-template-areas:
 				"main"
-				"footer"
 				"menu";
 		}
 	}
@@ -47,19 +86,22 @@
 /* Largo */
 @media not all and (max-width: 100vh) {
 	.Layout {
-		grid-template-columns: minmax(1cm, 4rem) 1fr;
+		grid-template-columns: auto 1fr;
 		grid-template-areas: 
-			"menu main"
-			"footer footer";
+			"menu main";
 	}
 
 	/* Muito largo */
 	@media screen and (min-width:800px) {
 		.Layout {
-			grid-template-columns: minmax(240px, 4rem) 1fr;
 			grid-template-areas: 
-				"menu main" 
-				"footer footer";
+				"menu main";
+		}
+	}
+
+	@media screen and (min-width: 1600px){
+		.Layout {
+			grid-template-columns: minmax( 240px, 4rem ) 1fr;
 		}
 	}
 }
