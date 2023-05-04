@@ -1,4 +1,4 @@
-export default function Page({ params }) {
+export default function Page() {
   return (
     <section>
       <header>

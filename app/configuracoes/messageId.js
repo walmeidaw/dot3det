@@ -1,17 +1,12 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import localforage from "localforage";
-
 import Style from './index.module.scss'
 
 function MessageId(){
     const [token, setToken] = useState( null )
     const [copyed,setCopyed] = useState( false )
-
-    localforage.getItem('USER_TOKEN').then( value => {
-        setToken( value )
-    })
 
     function copy(){
         if( token ){
@@ -22,6 +17,13 @@ function MessageId(){
             }, 5000 )
         }
     }
+
+    useEffect(()=>{
+        localforage.getItem('USER_TOKEN').then( value => {
+            setToken( value )
+        })
+        return;
+    },[])
 
     return (
         <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
@@ -35,9 +37,4 @@ function MessageId(){
         </div>
     )
 }
-
-function Loading(){
-    return <>carregando token...</>
-}
-
-export { MessageId, Loading }
+export default MessageId

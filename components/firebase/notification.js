@@ -13,55 +13,69 @@ import style from './notification.module.scss'
 import localforage from "localforage";
 
 export default function NotificationCenter() {
-  const [token, setToken] = useState(null)
+	const [messaging, setMessaging] = useState(null)
 
-  const messaging = getMessaging(App);
+	function Notify({ title, body, image = undefined }) {
+		return (
+			<div className={style.Notify}>
+				{image && <div className={style.Image}><Image src={image} alt="title" fill={true} /></div>}
+				<div className={style.Title}>{title}</div>
+				<div className={style.Body}>{body}</div>
+			</div>
+		)
+	}
 
-  getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FIREBASE_KEY }).then((currentToken) => {
-    if (currentToken) {
-      setToken(currentToken)
-      localforage.setItem('USER_TOKEN', currentToken )
-    } else {
-      console.log('No registration token available. Request permission to generate one.');
-    }
-  }).catch((err) => {
-    console.log('An error occurred while retrieving token. ', err);
-  });
+	function GetToken(){
+		getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FIREBASE_KEY }).then((currentToken) => {
+			if (currentToken) {
+				localforage.setItem('USER_TOKEN', currentToken)
+			} else {
+				console.log('No registration token available. Request permission to generate one.');
+			}
+		}).catch((err) => {
+			console.log('An error occurred while retrieving token. ', err);
+		});
+	}
 
-  function Notify({ title, body, image = undefined }) {
-    return (
-      <div className={ style.Notify }>
-        { image && <div className={ style.Image }><Image src={ image } alt="title" fill={true} /></div> }
-        <div className={ style.Title }>{title}</div>
-        <div className={ style.Body }>{body}</div>
-      </div>
-    )
-  }
+	function RegisterMessageListener() {
+		onMessage(messaging, message => {
+			if (message.data.type.includes('in-app')) {
+				toast(<Notify {...message.notification} />)
+			}
 
-  function AlertNotification( data ){
-    if ("Notification" in window && Notification.permission === "granted") {
-      new Notification( data.title , data );
-    }
-  }
+			if (message.data.type.includes('out-app')) {
+				AlertNotification(message.notification)
+			}
+		})
+	}
 
-  onMessage(messaging, message => {
-    if( message.data.type.includes('in-app') ){
-      toast( <Notify {...message.notification} /> )
-    }
+	function AlertNotification(data) {
+		if ("Notification" in window && Notification.permission === "granted") {
+			new Notification(data.title, data);
+		}
+	}
 
-    if( message.data.type.includes('out-app') ){
-      AlertNotification( message.notification )
-    }
-  })
+	function requestPermission() {
+		if ("Notification" in window && Notification.permission === "granted") {
+			Notification.requestPermission()
+		}
+	}
 
-  useEffect(() => {
-    function requestPermission() {
-      Notification.requestPermission()
-    }
+	useEffect(() => {
+		setMessaging( getMessaging(App) )
+		requestPermission()
+		return;
+	}, [])
 
-    requestPermission()
-    return;
-  }, [])
+	useEffect(() => {
+		if(messaging){
+			const token = localforage.getItem('USER_TOKEN')
+			if( !token ){
+				GetToken()
+			}
+			RegisterMessageListener()
+		}
+	}, [ messaging ])
 
-  return <><ToastContainer /></>
+	return <><ToastContainer /></>
 }
