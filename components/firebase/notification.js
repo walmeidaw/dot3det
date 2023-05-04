@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Image from "next/image";
 
 import style from './notification.module.scss'
+import localforage from "localforage";
 
 export default function NotificationCenter() {
   const [token, setToken] = useState(null)
@@ -19,6 +20,7 @@ export default function NotificationCenter() {
   getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_FIREBASE_KEY }).then((currentToken) => {
     if (currentToken) {
       setToken(currentToken)
+      localforage.setItem('USER_TOKEN', currentToken )
     } else {
       console.log('No registration token available. Request permission to generate one.');
     }

@@ -1,0 +1,22 @@
+.Bullet{
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-direction: row;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    background-color: rgba(var(--main-one-opaque-rgb), 20%);
+    border-radius: 2rem;
+
+    &.Active{
+        background-color: rgba(var(--main-one-opaque-rgb), 50%);
+    }
+
+    .Info{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        
+    }
+}
