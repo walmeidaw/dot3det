@@ -714,7 +714,20 @@
 			"description": "Página inicial",
 			"icons": [
 				{
-					"src": "/static/icons/windows11/Square44x44Logo.targetsize-96.png",
+					"src": "/static/icons/shortcuts/home.png",
+					"type": "image/png",
+					"purpose": "any",
+					"sizes": "96x96"
+				}
+			]
+		},
+		{
+			"name": "Configurações",
+			"url": "/configuracoes",
+			"description": "Acessa o painel de configurações.",
+			"icons": [
+				{
+					"src": "/static/icons/shortcuts/setting.png",
 					"type": "image/png",
 					"purpose": "any",
 					"sizes": "96x96"

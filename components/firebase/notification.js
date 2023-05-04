@@ -51,7 +51,10 @@ export default function NotificationCenter() {
 
 	function AlertNotification(data) {
 		if ("Notification" in window && Notification.permission === "granted") {
-			new Notification(data.title, data);
+			new Notification( data.title, {
+				...data,
+            	icon: '/static/icons/windows11/Square150x150Logo.scale-400.png'
+			});
 		}
 	}
 

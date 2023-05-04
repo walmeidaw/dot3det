@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-br" className={ nunito.className }>
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href={ `/manifest.json?v=${ new Date().getTime() }` } />
       </head>
       <body>
         <div className={ classes.Layout }>
