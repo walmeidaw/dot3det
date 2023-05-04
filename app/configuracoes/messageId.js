@@ -23,12 +23,16 @@ function MessageId(){
         if ("Notification" in window) {
             setAllowNotification( Notification.permission === "granted" )
         }
-
-        localforage.getItem('USER_TOKEN').then( value => {
-            setToken( value )
-        })
         return;
     },[])
+
+    useEffect(()=>{
+        if(allowNotification){
+            localforage.getItem('USER_TOKEN').then( value => {
+                setToken( value )
+            })
+        }
+    },[allowNotification])
 
     function request(){
         Notification.requestPermission().then( permission => {

@@ -60,12 +60,14 @@ export default function NotificationCenter() {
 		return;
 	}, [])
 
-	useEffect(() => {
+	useEffect(() => {		
 		if(messaging){
-			const token = localforage.getItem('USER_TOKEN')
-			if( !token ){
-				GetToken()
-			}
+			localforage.getItem('USER_TOKEN').then( value => {
+				if( !value ){
+					GetToken()
+				}
+			})
+
 			RegisterMessageListener()
 		}
 	}, [ messaging ])
