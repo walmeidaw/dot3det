@@ -53,7 +53,8 @@ export default function NotificationCenter() {
 		if ("Notification" in window && Notification.permission === "granted") {
 			new Notification( data.title, {
 				...data,
-            	icon: '/static/icons/windows11/Square150x150Logo.scale-400.png'
+				badge: 'https://dot3det.vercel.app/static/icons/shortcuts/badge.png',
+            	icon: 'https://dot3det.vercel.app/static/icons/windows11/Square150x150Logo.scale-400.png'
 			});
 		}
 	}
