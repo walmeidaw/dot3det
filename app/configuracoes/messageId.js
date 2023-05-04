@@ -7,6 +7,7 @@ import Style from './index.module.scss'
 function MessageId(){
     const [token, setToken] = useState( null )
     const [copyed,setCopyed] = useState( false )
+    const [allowNotification, setAllowNotification] = useState( null )
 
     function copy(){
         if( token ){
@@ -19,22 +20,39 @@ function MessageId(){
     }
 
     useEffect(()=>{
+        if ("Notification" in window) {
+            setAllowNotification( Notification.permission === "granted" )
+        }
+
         localforage.getItem('USER_TOKEN').then( value => {
             setToken( value )
         })
         return;
     },[])
 
-    return (
-        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-            <div className={ `${ Style.Bullet }${ copyed ? ` ${ Style.Active }` : '' }` } onClick={ copy }>
-                <strong>Token: </strong>
-                <span className={ Style.Info }>
-                    { token ? token : '---' }
-                </span>
+    function request(){
+        Notification.requestPermission().then( permission => {
+            setAllowNotification( permission === "granted" )
+        })
+    }
+    
+    if( allowNotification === null ){	
+        return <>Não compatível com notificações.</>
+    } else if( allowNotification ){
+        return (
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+                <div className={ `${ Style.Bullet }${ copyed ? ` ${ Style.Active }` : '' }` } onClick={ copy }>
+                    <strong>Token: </strong>
+                    <span className={ Style.Info }>
+                        { token ? token : '---' }
+                    </span>
+                </div>
+                { copyed && <span style={{ opacity: 0.6 }}>Copiado</span> }
             </div>
-            { copyed && <span style={{ opacity: 0.6 }}>Copiado</span> }
-        </div>
-    )
+        )
+    } else {
+        return <button onClick={ request }>Permitir notificações</button>
+    }
 }
+
 export default MessageId

@@ -5,7 +5,7 @@ export default function Page() {
         <header>
             <h1>Configurações</h1>
         </header>
-        <main>      
+        <main>
             <MessageId />
         </main>
     </section>

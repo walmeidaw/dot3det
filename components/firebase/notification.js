@@ -55,15 +55,8 @@ export default function NotificationCenter() {
 		}
 	}
 
-	function requestPermission() {
-		if ("Notification" in window && Notification.permission === "granted") {
-			Notification.requestPermission()
-		}
-	}
-
 	useEffect(() => {
 		setMessaging( getMessaging(App) )
-		requestPermission()
 		return;
 	}, [])
 
