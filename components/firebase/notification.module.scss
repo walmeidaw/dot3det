@@ -1,0 +1,22 @@
+.Notify{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  color: rgb(var(--foreground-rgb));
+
+  .Title{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .Image{
+    position: relative;
+    aspect-ratio: 16/9;
+    border-radius: .5rem;
+    overflow: hidden;
+  }
+
+  .Body{
+    font-size: 1rem;
+  }
+}
