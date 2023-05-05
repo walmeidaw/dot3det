@@ -24,9 +24,8 @@
     font-size: 16px;
   }
 
-  --background-rgb: 255,0,0;
-
-  @media (max-screen-fold-angle: 120deg) {
+  @media (max-screen-fold-angle < 180deg) {
+    --background-rgb: 255,0,0;
   }
 
   @media (device-posture: laptop) and (spanning: single-fold-horizontal){
