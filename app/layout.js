@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
           <Menu />
           <main className={ classes.Main }>
             <div>
-              <NotificationCenter />
+              {/* <NotificationCenter /> */}
             </div>
             <div className={ classes.Content }>
               {children}

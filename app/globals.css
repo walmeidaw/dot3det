@@ -23,6 +23,15 @@
   @media screen and (-webkit-device-pixel-ratio > 2) and (device-width > 380px){
     font-size: 16px;
   }
+
+  --background-rgb: 255,0,0;
+
+  @media (max-screen-fold-angle: 120deg) {
+  }
+
+  @media (device-posture: laptop) and (spanning: single-fold-horizontal){
+    --background-rgb: 255,255,0;
+  }
 }
 
 .material-symbols-rounded {
