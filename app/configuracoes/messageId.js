@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import localforage from "localforage";
 import Style from './index.module.scss'
+import { toast } from "react-toastify";
 
 function MessageId(){
     const [token, setToken] = useState( null )
@@ -16,6 +17,8 @@ function MessageId(){
             setTimeout(()=>{
                 setCopyed(false)
             }, 5000 )
+        }else{
+            request()
         }
     }
 
@@ -37,6 +40,10 @@ function MessageId(){
     function request(){
         Notification.requestPermission().then( permission => {
             setAllowNotification( permission === "granted" )
+            
+            if(permission === "granted"){
+                toast('Permissão de notificação concedida.')
+            }
         })
     }
     
