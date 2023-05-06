@@ -129,3 +129,4 @@ dist
 
 public/sw*
 public/workbox*
+public/worker*
